@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vivelo - Soluções Médicas e Hospitalares</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-pink: #D02399;
+            --primary-blue: #1A1F70;
+            --accent-purple: #342076;
+            --light-purple: #56207D;
+            --text-dark: #2c2c2c;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            height: 60px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-pink);
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-blue);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-purple) 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            background: var(--primary-pink);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .cta-button:hover {
+            background: #B01D85;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(208, 35, 153, 0.3);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-alt {
+            background: var(--bg-light);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            color: var(--primary-pink);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .value-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .value-item h4 {
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Areas Section */
+        .areas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .area-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .area-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .area-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-pink), var(--accent-purple));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .area-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        /* Products Section */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-purple));
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .product-body {
+            padding: 1.5rem;
+        }
+
+        .product-body h4 {
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .team-avatar {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--primary-pink), var(--accent-purple));
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            font-weight: bold;
+        }
+
+        .team-card h4 {
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .team-card .role {
+            color: var(--primary-pink);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: flex;
+            justify-content: center;
+        }
+
+        .contact-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .contact-avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--primary-pink), var(--accent-purple));
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            font-weight: bold;
+        }
+
+        .contact-card h3 {
+            color: var(--primary-blue);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-role {
+            color: var(--primary-pink);
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            text-align: left;
+            color: var(--text-light);
+        }
+
+        .contact-item i {
+            margin-right: 1rem;
+            color: var(--primary-pink);
+            font-size: 1.2rem;
+        }
+
+        .whatsapp-button {
+            background: #25D366;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 2rem;
+            transition: all 0.3s;
+        }
+
+        .whatsapp-button:hover {
+            background: #1DA851;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-blue);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: var(--primary-pink);
+        }
+
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-pink);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <img src="img/header_logo.png" alt="Logo" class="logo" width="80" height="60">
+            
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#sobre">Sobre Nós</a></li>
+                <li><a href="#areas">Áreas de Atuação</a></li>
+                <li><a href="#produtos">Serviços</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+            
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <h1 class="fade-in">Transformando a Saúde com Tecnologia</h1>
+            <p class="fade-in">Soluções médicas e hospitalares de alta qualidade para todo o Brasil. Parceiros exclusivos de fabricantes internacionais líderes em tecnologia médica.</p>
+            <a href="#contato" class="cta-button fade-in">Solicite uma Cotação</a>
+        </div>
+    </section>
+
+    <section id="sobre" class="section-alt">
+        <div class="container">
+            <div class="section-header">
+                <h2>Sobre a Vivelo</h2>
+                <p>Empresa brasileira com operações nacionais e foco em parcerias estratégicas exclusivas</p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Nossa Missão</h3>
+                    <p>Transformar a saúde através de soluções tecnológicas guiadas pela empatia no cuidado às pessoas.</p>
+                    
+                    <h3>Nossa Visão</h3>
+                    <p>Tornar-se referência global na implementação de soluções inovadoras que criem impacto significativo na saúde.</p>
+                    
+                    <h3>Nossos Diferenciais</h3>
+                    <p>Com sede em Joinville (SC), a Vivelo atua como representante oficial, importador e distribuidor de equipamentos médicos e dermatológicos no Brasil, estabelecendo parcerias exclusivas de longo prazo com fabricantes internacionais.</p>
+                </div>
+                
+                <div class="values-grid">
+                    <div class="value-item fade-in">
+                        <h4>💖 Pensar com o Coração</h4>
+                        <p>Colocamos a empatia no centro de tudo que fazemos</p>
+                    </div>
+                    <div class="value-item fade-in">
+                        <h4>🔬 Respeitar a Ciência</h4>
+                        <p>Baseamos nossas decisões em evidências científicas</p>
+                    </div>
+                    <div class="value-item fade-in">
+                        <h4>⚖️ Promover Igualdade</h4>
+                        <p>Trabalhamos por equidade e justiça na saúde</p>
+                    </div>
+                    <div class="value-item fade-in">
+                        <h4>💭 Valorizar a Liberdade</h4>
+                        <p>Incentivamos expressão e pensamento livres</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="areas">
+        <div class="container">
+            <div class="section-header">
+                <h2>Áreas de Atuação</h2>
+                <p>Atendemos os principais segmentos hospitalares com soluções especializadas</p>
+            </div>
+            
+            <div class="areas-grid">
+                <div class="area-card fade-in">
+                    <div class="area-icon">🩸</div>
+                    <h3>Bancos de Sangue</h3>
+                    <p>Equipamentos e soluções para coleta, processamento e armazenamento seguro de sangue e hemoderivados.</p>
+                </div>
+                
+                <div class="area-card fade-in">
+                    <div class="area-icon">👶</div>
+                    <h3>Neonatologia</h3>
+                    <p>Tecnologias avançadas para cuidados especializados com recém-nascidos e prematuros.</p>
+                </div>
+                
+                <div class="area-card fade-in">
+                    <div class="area-icon">🎗️</div>
+                    <h3>Oncologia e Hematologia</h3>
+                    <p>Equipamentos de precisão para diagnóstico e tratamento oncológico e hematológico.</p>
+                </div>
+                
+                <div class="area-card fade-in">
+                    <div class="area-icon">🏥</div>
+                    <h3>UTI</h3>
+                    <p>Soluções completas para Unidades de Terapia Intensiva com tecnologia de ponta.</p>
+                </div>
+                
+                <div class="area-card fade-in">
+                    <div class="area-icon">💉</div>
+                    <h3>Anestesiologia e Salas Cirúrgicas</h3>
+                    <p>Oferecemos equipamentos e sistemas de alta tecnologia que garantem a segurança e a eficácia em procedimentos anestésicos e cirúrgicos.</p>
+                </div>
+                
+                <div class="area-card fade-in">
+                    <div class="area-icon">🔍</div>
+                    <h3>Gastroenterologia</h3>
+                    <p>Dispositivos especializados para diagnóstico e tratamento gastroenterológico.</p>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <section id="produtos" class="section-alt">
+        <div class="container">
+            <div class="section-header">
+                <h2>Serviços</h2>
+                <p>Soluções completas para o mercado hospitalar e dermatológico</p>
+            </div>
+            
+            <div class="products-grid">
+                <div class="product-card fade-in">
+                    <div class="product-header">
+                        <h3>Equipamentos Médicos</h3>
+                    </div>
+                    <div class="product-body">
+                        <h4>Tecnologia de Ponta</h4>
+                        <p>Importação e distribuição de equipamentos médicos de fabricantes internacionais renomados.</p>
+                    </div>
+                </div>
+                
+                <div class="product-card fade-in">
+                    <div class="product-header">
+                        <h3>Registro Regulatório</h3>
+                    </div>
+                    <div class="product-body">
+                        <h4>Conformidade ANVISA</h4>
+                        <p>Expertise completa em registro regulatório e conformidade com normas brasileiras.</p>
+                    </div>
+                </div>
+                
+                <div class="product-card fade-in">
+                    <div class="product-header">
+                        <h3>Suporte Técnico</h3>
+                    </div>
+                    <div class="product-body">
+                        <h4>Atendimento Especializado</h4>
+                        <p>Equipe técnica qualificada para instalação, treinamento e manutenção.</p>
+                    </div>
+                </div>
+                
+                <div class="product-card fade-in">
+                    <div class="product-header">
+                        <h3>Logística Nacional</h3>
+                    </div>
+                    <div class="product-body">
+                        <h4>Distribuição Eficiente</h4>
+                        <p>Rede de distribuição nacional com armazéns licenciados pela ANVISA.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="contato" class="section-alt">
+        <div class="container">
+            <div class="section-header">
+                <h2>Entre em Contato</h2>
+                <p>Estamos prontos para atender suas necessidades em soluções médicas</p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-card">
+                    <div class="contact-avatar">VLO</div>
+                    <h3>Time Comercial</h3>
+                    <p class="contact-role">Representação e Vendas</p>
+                    
+                    <div class="contact-item">
+                        <i>📧</i>
+                        <div>
+                            <strong>E-mail</strong><br>
+                            lucas.zenon@vivelo.com.br
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i>📱</i>
+                        <div>
+                            <strong>WhatsApp</strong><br>
+                            +55 35 9 9733 0023
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i>📍</i>
+                        <div>
+                            <strong>Localização</strong><br>
+                            São Paulo	
+                        </div>
+                    </div>
+                    
+                    <a href="https://wa.me/5535997330023?text=Olá%20Lucas,%20gostaria%20de%20saber%20mais%20sobre%20os%20produtos%20e%20serviços%20da%20Vivelo." class="whatsapp-button" target="_blank">
+                        💬 Conversar no WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Vivelo</h4>
+                    <p>Transformando a saúde através de soluções tecnológicas guiadas pela empatia no cuidado às pessoas.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Navegação</h4>
+                    <a href="#home">Home</a>
+                    <a href="#sobre">Sobre Nós</a>
+                    <a href="#areas">Áreas de Atuação</a>
+                    <a href="#produtos">Produtos</a>
+                    <a href="#contato">Contato</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Áreas de Atuação</h4>
+                    <a href="#">Bancos de Sangue</a>
+                    <a href="#">Neonatologia</a>
+                    <a href="#">Oncologia</a>
+                    <a href="#">UTI</a>
+                    <a href="#">Anestesiologia</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contato</h4>
+                    <p>📧
